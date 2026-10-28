@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f2f4ee" />
+  <title>Gather | Budget & savings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="budget.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview"><span class="brand-mark">g</span><span>gather</span></a>
+      <div class="workspace">Your money</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#overview"><span class="nav-icon">â—«</span>Overview</a>
+        <a href="#goals"><span class="nav-icon">â—Ž</span>Savings goals</a>
+        <a href="#activity"><span class="nav-icon">â†•</span>Activity</a>
+        <a href="#rules"><span class="nav-icon">âŸ³</span>Auto-save rules</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="help-link" href="#bank">Connected accounts</a>
+        <div class="profile"><span class="avatar">JD</span><span><strong>Jamie Davis</strong><small>Personal account</small></span></div>
+      </div>
+    </aside>
+
+    <main id="overview">
+      <header class="topbar"><span class="demo-pill"><i class="demo-dot"></i> DEMO MODE</span><button class="icon-button" type="button" aria-label="Notifications" title="Notifications">â™§</button><span class="avatar">JD</span></header>
+      <div class="content">
+        <section class="welcome">
+          <div><p>MONDAY, OCTOBER 19, 2026</p><h1>Your money, in motion.</h1></div>
+          <div class="actions"><button class="button secondary" type="button" data-open="rule-modal">ï¼‹ Create rule</button><button class="button secondary" type="button" data-open="withdraw-modal">â†— Withdraw</button><button class="button" type="button" data-open="goal-modal">ï¼‹ New goal</button></div>
+        </section>
+
+        <section class="overview" aria-label="Budget overview">
+          <div class="metric"><div class="metric-label">Total saved <span title="Across your savings goals">â“˜</span></div><div class="metric-value"><strong class="amount-large" id="saved-total">$8,450</strong><span class="change">â†— 8.4%</span></div><div class="metric-note">Compared with last month</div></div>
+          <div class="metric"><div class="metric-label">Monthly income</div><div class="metric-value"><strong class="amount-large">$5,200</strong></div><div class="metric-note">Next payday Â· Oct 23</div></div>
+          <div class="metric"><div class="metric-label">Available to spend</div><div class="metric-value"><strong class="amount-large">$1,284</strong></div><div class="metric-note">After bills and planned savings</div></div>
+        </section>
+
+        <div class="overview-grid">
+          <section class="panel" aria-labelledby="trend-title">
+            <div class="panel-head"><div><h2 id="trend-title">Savings over time</h2><span class="subtle">Your progress, month by month</span></div><select id="chart-range" class="select-control" aria-label="Chart date range"><option value="6">Last 6 months</option><option value="3">Last 3 months</option></select></div>
+            <div class="chart-wrap">
+              <svg class="chart" viewBox="0 0 640 190" role="img" aria-label="Savings trend rising from April through September">
+                <defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#a9d4bd" stop-opacity=".48"/><stop offset="100%" stop-color="#a9d4bd" stop-opacity="0"/></linearGradient></defs>
+                <g class="chart-grid"><line x1="35" y1="25" x2="625" y2="25"/><line x1="35" y1="68" x2="625" y2="68"/><line x1="35" y1="111" x2="625" y2="111"/><line x1="35" y1="154" x2="625" y2="154"/></g>
+                <path class="chart-fill" d="M35 143 C80 136,90 126,130 130 S190 111,225 114 S286 88,320 99 S380 78,415 81 S480 53,515 61 S575 33,625 29 L625 160 L35 160 Z"/>
+                <path class="chart-line" d="M35 143 C80 136,90 126,130 130 S190 111,225 114 S286 88,320 99 S380 78,415 81 S480 53,515 61 S575 33,625 29"/>
+                <g class="chart-dots"><circle cx="35" cy="143" r="4"/><circle cx="153" cy="126" r="4"/><circle cx="271" cy="103" r="4"/><circle cx="389" cy="84" r="4"/><circle cx="507" cy="61" r="4"/><circle cx="625" cy="29" r="4"/></g>
+              </svg>
+              <div class="chart-labels" id="chart-labels"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div>
+            </div>
+          </section>
+
+          <section class="panel" id="goals" aria-labelledby="goals-title">
+            <div class="panel-head"><div><h2 id="goals-title">Your goals</h2><span class="subtle" id="goal-count">3 goals in progress</span></div><button class="button secondary small" type="button" data-open="goal-modal">ï¼‹ Add</button></div>
+            <div class="goal-list" id="goal-list"></div>
+          </section>
+        </div>
+
+        <div class="lower-grid">
+          <section class="panel" id="activity" aria-labelledby="activity-title">
+            <div class="panel-head"><div><h2 id="activity-title">Recent activity</h2><span class="subtle">Latest movements across your money</span></div><button class="button secondary small" type="button" id="view-activity">View all</button></div>
+            <div class="transactions" id="transaction-list"></div>
+          </section>
+
+          <section class="panel" id="rules" aria-labelledby="rules-title">
+            <div class="panel-head"><div><h2 id="rules-title">Auto-save rules</h2><span class="subtle">Your savings, on your schedule</span></div><button class="button secondary small" type="button" data-open="rule-modal">ï¼‹ Add</button></div>
+            <div class="rules" id="rule-list"></div>
+            <div class="bank-row" id="bank"><span class="bank-logo">B</span><span><strong id="bank-name">Northstar Bank</strong><small id="bank-detail">Checking Â· â€¢â€¢â€¢â€¢ 4821 Â· Demo link</small></span><button class="button secondary small" type="button" data-open="bank-modal" id="bank-button">Manage</button></div>
+          </section>
+        </div>
+
+        <div class="notice"><span>â“˜</span><span><b>Demo only.</b> This prototype does not connect to a bank or move money. Real automatic transfers require a secure bank-link and payment provider, your explicit authorization, and backend setup.</span></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="goal-modal" role="dialog" aria-modal="true" aria-labelledby="goal-modal-title">
+    <form class="modal" id="goal-form">
+      <div class="modal-top"><h2 id="goal-modal-title">Create a savings goal</h2><button class="close" type="button" data-close aria-label="Close">Ã—</button></div>
+      <p class="modal-copy">Give your savings a destination. You can change the target any time.</p>
+      <label class="form-field">Goal name<input name="name" maxlength="35" placeholder="e.g. A little breathing room" required /></label>
+      <label class="form-field">Target amount<input name="target" type="number" min="1" step="1" placeholder="5000" required /></label>
+      <label class="form-field">Starting amount<input name="current" type="number" min="0" step="1" value="0" required /></label>
+      <div class="modal-actions"><button class="button secondary" type="button" data-close>Cancel</button><button class="button" type="submit">Save goal</button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="rule-modal" role="dialog" aria-modal="true" aria-labelledby="rule-modal-title">
+    <form class="modal" id="rule-form">
+      <div class="modal-top"><h2 id="rule-modal-title">Create an auto-save rule</h2><button class="close" type="button" data-close aria-label="Close">Ã—</button></div>
+      <p class="modal-copy">Set a repeat amount and cadence. In this demo, rules are reminders only; no transfer will occur.</p>
+      <label class="form-field">Amount<input name="amount" type="number" min="1" step="1" placeholder="25" required /></label>
+      <label class="form-field">Frequency<select name="frequency"><option>Every week</option><option>Every payday</option><option>Every month</option></select></label>
+      <label class="form-field">Send to<select name="goal" id="rule-goal-select"></select></label>
+      <div class="modal-actions"><button class="button secondary" type="button" data-close>Cancel</button><button class="button" type="submit">Save rule</button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop" id="bank-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title">
+    <div class="modal">
+      <div class="modal-top"><h2 id="bank-modal-title">Connected account</h2><button class="close" type="button" data-close aria-label="Close">Ã—</button></div>
+      <p class="modal-copy">Bank connections are not enabled in this prototype. A production version should use a regulated provider's secure authorization flow; never enter bank credentials here.</p>
+      <div class="account-option"><input type="radio" checked disabled aria-label="Demo account selected" /><strong>Northstar Bank</strong><span>Checking Â· â€¢â€¢â€¢â€¢ 4821 Â· sample data</span></div>
+      <div class="modal-actions"><button class="button secondary" type="button" data-close>Close</button><button class="button" type="button" id="demo-transfer">Run demo transfer</button></div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="withdraw-modal" role="dialog" aria-modal="true" aria-labelledby="withdraw-modal-title">
+    <form class="modal" id="withdraw-form">
+      <div class="modal-top"><h2 id="withdraw-modal-title">Withdraw savings</h2><button class="close" type="button" data-close aria-label="Close">Ã—</button></div>
+      <p class="modal-copy">Withdraw from a savings goal anytime. A 5% fee is deducted from the amount you withdraw; the remaining 95% is your payout.</p>
+      <label class="form-field">Withdraw from<select name="goal" id="withdraw-goal-select" required></select></label>
+      <label class="form-field">Amount to withdraw<input name="amount" id="withdraw-amount" type="number" min="0.01" step="0.01" placeholder="0.00" required /></label>
+      <div class="withdraw-breakdown" aria-live="polite">
+        <div><span>Withdrawal amount</span><strong id="withdraw-gross">$0.00</strong></div>
+        <div><span>5% fee to Gather</span><strong id="withdraw-fee">$0.00</strong></div>
+        <div class="withdraw-net"><span>You receive</span><strong id="withdraw-net">$0.00</strong></div>
+      </div>
+      <p class="modal-copy" id="withdraw-available">Available to withdraw: $0</p>
+      <div class="modal-actions"><button class="button secondary" type="button" data-close>Cancel</button><button class="button" type="submit">Confirm demo withdrawal</button></div>
+      <p class="subtle">Demo only: this records a simulated withdrawal and does not transfer money.</p>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="budget.js" defer></script>
+</body>
+</html>
+
